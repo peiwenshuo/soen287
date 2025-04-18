@@ -22,8 +22,10 @@ app.set('view engine','html');
 app.engine('html', ejs.renderFile);
 app.set('views',path.join(__dirname,'views'));
 
-const usersFile = path.join(__dirname,'login.txt');
-const petsFile = path.join(__dirname,'pets.txt');
+
+const os        = require('os');
+const usersFile = path.join(os.tmpdir(), 'login.txt');
+const petsFile  = path.join(os.tmpdir(), 'pets.txt');
 
 app.use((req, res, next) => {
     res.locals.username = req.session.username || null;
