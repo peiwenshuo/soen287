@@ -249,9 +249,6 @@ app.get('/pets',(req,res) => {res.render('pets',{title:'Browse Available Pets',
 app.get('/privacy',(req,res) => {res.render('privacy',{title :'Privacy Statement',
     username: req.session.username || null})});
 
-
-      
-      
-      
-
-    module.exports = app
+    module.exports = (req, res) => {
+      return app(req, res);
+    };
