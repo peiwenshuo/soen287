@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cat care - Adopt A Cat/Dog</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/form-style.css">
+
+  
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('accountForm');
+      const errorMsg = document.getElementById('errorMsg');
+      form.addEventListener('submit', function (e) {
+        errorMsg.textContent = '';
+        const username = form.username.value.trim();
+        const password = form.password.value.trim();
+
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+
+        if (!usernameRegex.test(username)) {
+          e.preventDefault();
+          errorMsg.textContent = 'Username must contain only letters and digits.';
+          return;
+        }
+
+        if (!passwordRegex.test(password)) {
+          e.preventDefault();
+          errorMsg.textContent = 'Password must be at least 4 characters and contain at least one letter and one digit.';
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+<%- include('partials/header.html',{title:'Login'}) %>
+<div class="container">
+  <main>
+    <h2>Login</h2>
+    <% if (error) { %>
+        <div class="alert-box" style="color: #a94442; background-color: #f2dede;"><%= error %></div>
+      <% } %>
+      
+    <form id="loginForm" action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <div id="errorMsg" style="color: red;"></div>
+        
+        <button type="submit">Login</button>
+
+    </form>
+
+    <br>
+    <a href="/" class="button">⬅ Back to Home</a>
+    </main>
+    </div>
+    <%- include('partials/footer.html') %>
+</body>
+</html>
+
+

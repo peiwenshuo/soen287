@@ -1,0 +1,27 @@
+<header>
+  <div class="header-wrapper">
+    <div class="header-top">
+      
+      <div class="logo-title">
+        <a class="logo" href="/"><img src="/img/logotrans.png" alt="logo"></a>
+        <h1>Paws & Promises</h1>
+      </div>
+
+      
+      <div class="header-meta">
+        <div id="dateTimeDisplay"></div>
+
+        <% if (username) { %>
+          <div class="user-block">
+            <div class="logged-user">🔒 Logged in as: <%= username %></div>
+            <form action="/logout" method="post">
+              <button type="submit" class="logout-btn">Logout</button>
+            </form>
+          </div>
+        <% } else { %>
+          <div class="logged-user not-logged">🔓 Not logged in</div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</header>

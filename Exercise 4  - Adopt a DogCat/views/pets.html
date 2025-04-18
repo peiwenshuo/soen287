@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find a Dog/Cat</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('findForm');
+      const resultContainer = document.getElementById('results');
+      const allPets = [
+        {
+          type: 'dog',
+          breed: 'husky',
+          age: 'adult',
+          gender: 'male',
+          compatibility: ['otherdogs', 'smallchildren'],
+          img: '/img/pet1.jpg',
+        },
+        {
+          type: 'cat',
+          breed: 'british shorthair',
+          age: 'adult',
+          gender: 'female',
+          compatibility: ['otherdogs', 'othercats', 'smallchildren'],
+          img: '/img/pet2.jpg',
+        },
+        {
+          type: 'cat',
+          breed: 'siamese',
+          age: 'adult',
+          gender: 'male',
+          compatibility: ['otherdogs', 'othercats', 'smallchildren'],
+          img: '/img/pet3.jpg',
+        },
+        {
+          type: 'cat',
+          breed: 'mixed breed',
+          age: 'adult',
+          gender: 'male',
+          compatibility: ['otherdogs', 'othercats', 'smallchildren'],
+          img: '/img/pet4.jpg',
+        },
+      ];
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const type = form.petType.value.toLowerCase();
+        const breed = form.breed.value.toLowerCase();
+        const age = form.age.value.toLowerCase();
+        const gender = form.gender.value.toLowerCase();
+        const compatibility = Array.from(form.querySelectorAll('input[name="getsAlong[]"]:checked')).map(el => el.value);
+
+        const matched = allPets.filter(pet => {
+          const matchType = type === 'any' || pet.type === type;
+          const matchBreed = breed === 'any' || pet.breed === breed;
+          const matchAge = age === 'any' || pet.age === age;
+          const matchGender = gender === 'any' || pet.gender === gender;
+          const matchCompatibility = compatibility.every(c => pet.compatibility.includes(c));
+          return matchType && matchBreed && matchAge && matchGender && matchCompatibility;
+        });
+
+        resultContainer.innerHTML = '<h3>Pets Matching Your Criteria:</h3>';
+        if (matched.length === 0) {
+          resultContainer.innerHTML += '<p>No pets match your criteria.</p>';
+        } else {
+          matched.forEach(p => {
+            resultContainer.innerHTML += `
+              <div class="pet-item">
+                <img src="${p.img}" alt="${p.breed}">
+                <div class="pet-info">
+                  <p><strong>Pet Type:</strong> ${p.type}</p>
+                  <p><strong>Breed:</strong> ${p.breed}</p>
+                  <p><strong>Age:</strong> ${p.age}</p>
+                  <p><strong>Gender:</strong> ${p.gender}</p>
+                  <p><strong>Gets along with:</strong> ${p.compatibility.join(', ')}</p>
+                  <button onclick="alert('Thank you for your interest!')">Interested!</button>
+                </div>
+              </div>
+            `;
+          });
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <%- include('partials/header.html', { title: 'Find a Dog/Cat' }) %>
+  <div class="container">
+    <aside>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/find">Find a Dog/Cat</a></li>
+          <li><a href="/giveaway">Have a pet to Give Away</a></li>
+          <li><a href="/dogcare">Dog cares</a></li>
+          <li><a href="/catcare">Cat cares</a></li>
+          <li><a href="/create-account">Create Account</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/contact">Contact us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <h2>Find a Dog/Cat</h2>
+      <form id="findForm">
+        <label>Pet Type:
+          <select name="petType">
+            <option value="any">Any</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </label>
+        <label>Breed:
+          <select name="breed">
+            <option value="any">Any</option>
+            <option value="husky">Husky</option>
+            <option value="british shorthair">British Shorthair</option>
+            <option value="siamese">Siamese</option>
+            <option value="mixed breed">Mixed Breed</option>
+          </select>
+        </label>
+        <label>Age:
+          <select name="age">
+            <option value="any">Any</option>
+            <option value="kitten">0-1 years</option>
+            <option value="adult">1-7 years</option>
+            <option value="senior">7+ years</option>
+          </select>
+        </label>
+        <label>Gender:
+          <select name="gender">
+            <option value="any">Any</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+        <fieldset>
+          <legend>Gets along with:</legend>
+          <label><input type="checkbox" name="getsAlong[]" value="otherdogs"> Other dogs</label><br>
+          <label><input type="checkbox" name="getsAlong[]" value="othercats"> Other cats</label><br>
+          <label><input type="checkbox" name="getsAlong[]" value="smallchildren"> Small children</label>
+        </fieldset>
+        <br>
+        <button type="submit">Search</button>
+      </form>
+
+      <div id="results"></div>
+    </main>
+  </div>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

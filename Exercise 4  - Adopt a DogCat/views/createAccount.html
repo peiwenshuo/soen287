@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/form-style.css">
+
+  
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('accountForm');
+      const errorMsg = document.getElementById('errorMsg');
+      form.addEventListener('submit', function (e) {
+        errorMsg.textContent = '';
+        const username = form.username.value.trim();
+        const password = form.password.value.trim();
+
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+
+        if (!usernameRegex.test(username)) {
+          e.preventDefault();
+          errorMsg.textContent = 'Username must contain only letters and digits.';
+          return;
+        }
+
+        if (!passwordRegex.test(password)) {
+          e.preventDefault();
+          errorMsg.textContent = 'Password must be at least 4 characters and contain at least one letter and one digit.';
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <%- include('partials/header.html', { title: 'Create Account' }) %>
+  <div class="container">
+    <main>
+      <h2>Create Account</h2>
+
+
+      
+      <% if (username) { %>
+        <div class="alert-box">
+          ⚠️ You are already logged in as <strong><%= username %></strong>.
+          Please log out before creating a new account.
+      
+          <form action="/logout" method="post" style="display:inline;">
+            <button type="submit" class="logout-btn">Log out</button>
+          </form>
+        </div>
+      <% } %>
+
+
+
+      <form id="accountForm" action="/create-account" method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" name="username" id="username" required><br>
+        <small>Letters and digits only</small><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" name="password" id="password" required><br>
+        <small>At least 4 characters, must contain letters and digits</small><br><br>
+
+        <div id="errorMsg" style="color:red;"></div>
+        <% if (error) { %><p style="color: red;"><%= error %></p><% } %>
+        <% if (success) { %><p style="color: green;"><%= success %></p><% } %>
+
+        <button type="submit">Create Account</button>
+      </form>
+      <br>
+      <a href="/" class="button">⬅ Back to Home</a>
+    </main>
+  </div>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

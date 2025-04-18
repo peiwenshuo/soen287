@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cat care - Adopt A Cat/Dog</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+<%- include('partials/header.html',{title:'Have a pet to Give away'}) %>
+<div class="container">
+  <aside>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/find">Find a Dog/Cat</a></li>
+        <li><a href="/giveaway">Have a pet to Give Away</a></li>
+        <li><a href="/dogcare">Dog cares</a></li>
+        <li><a href="/catcare">Cat cares</a></li>
+        
+        <li><a href="/create-account">Create Account</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/contact">Contact us</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <h2>Have a Pet to Give away</h2>
+
+    <div id="errorMessage" style="color: red"></div>
+    <form action="/submitPet" method="post" id="giveawayForm">
+      <input type="hidden" name="username" value="<%= username %>">
+      <fieldset>
+        <legend>Pet Info</legend>
+
+        <label for="petType">Pet Type:</label>
+        <select name="petType" id="petType">
+          <option value="">-- Select Pet Type --</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+        </select><br>
+
+        <label for="breed">Breed:</label>
+        <select name="breed" id="breed">
+          <option value="">-- Select Breed --</option>
+          <option value="any">Mix breed</option>
+          <option value="breed1">Husky</option>
+          <option value="breed2">British Shorthair</option>
+          <option value="breed3">Siamese</option>
+        </select><br>
+
+        <label for="age">Age:</label>
+        <select name="age" id="age">
+          <option value="">-- Select Age --</option>
+          <option value="kitten">0-1 years</option>
+          <option value="adult">1-7 years</option>
+          <option value="senior">7+ years</option>
+        </select><br>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+          <option value="">-- Select Gender --</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select><br>
+
+        <p>Gets along with:</p>
+        <label>
+          <input type="checkbox" name="getsAlong[]" value="otherdogs">
+          Other dogs
+        </label><br>
+
+        <label>
+          <input type="checkbox" name="getsAlong[]" value="othercats">
+          Other cats
+        </label><br>
+
+        <label>
+          <input type="checkbox" name="getsAlong[]" value="smallchildren">
+          Small children
+        </label><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Owner Info</legend>
+
+        <label for="ownername">Name (family name):</label>
+        <input type="text" id="ownername" name="ownername" placeholder="family name">
+        <br>
+
+        <label for="owneremail">Email:</label>
+        <input type="text" id="owneremail" name="owneremail" placeholder="example@mail.com">
+        <br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Additional Info</legend>
+        <label for="comments">Tell us more about your pet :</label>
+        <br>
+        <textarea id="comments" name="comments" rows="5" cols="20"></textarea>
+      </fieldset>
+      <br><br>
+
+      <button type="submit">Submit</button>
+      <button type="reset">Clear</button>
+    </form>
+  </main>
+</div>
+
+
+<script src="js/giveaway.js" defer></script>
+<%- include('partials/footer.html') %>
+</body>
+</html>

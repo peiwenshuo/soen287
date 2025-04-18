@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telephone Number Form</title>
+</head>
+<body>
+<h1>Submit your Details</h1>
+
+<form action="/checkPhone" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+
+    <label for="phone">Telephone number (ddd-ddd-dddd):</label>
+    <input type="text" id="phone" name="phone" pattern="\d{3}-\d{3}-\d{4}" required>
+    <br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>

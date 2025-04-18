@@ -1,0 +1,6 @@
+1:system:dog:breed1:adult:male:otherdogs,smallchildren:System Admin:admin@paws.com:Default system pet
+2:system:cat:breed2:adult:female:otherdogs,othercats,smallchildren:System Admin:admin@paws.com:Default system pet
+3:system:cat:breed3:adult:male:otherdogs,othercats,smallchildren:System Admin:admin@paws.com:Default system pet
+4:system:cat:breed4:adult:male:otherdogs,othercats,smallchildren:System Admin:admin@paws.com:Default system pet
+
+5:peiwenshuo:dog:any:kitten:male:otherdogs,othercats,smallchildren:ceshi3:ceshi3@ceshi.com:ceshi3

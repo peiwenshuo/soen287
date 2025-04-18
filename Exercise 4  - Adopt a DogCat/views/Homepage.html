@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cat care - Adopt A Cat/Dog</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+<%- include('partials/header.html',{title:'Adopt A Cat/Dog - Home'}) %>
+<div class="container">
+  <aside>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/find">Find a Dog/Cat</a></li>
+        <li><a href="/giveaway">Have a pet to Give Away</a></li>
+        <li><a href="/dogcare">Dog cares</a></li>
+        <li><a href="/catcare">Cat cares</a></li>
+        
+        <li><a href="/create-account">Create Account</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/contact">Contact us</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main>
+    <h2>
+      Welcome to Paws & Promises !
+    </h2>
+         <p>Whether you’re looking for a new family member or a loving home for your
+           pet, you’ve come to the right place. <br>
+           Explore our site to learn more about
+           available pets, search by criteria, and get helpful pet care tips!
+         </p>
+         <div class="home-image">
+          <img src="/img/home.jpg" alt="Home pic"style="max-width:100%; border-radius:10px; margin-top: 20px;">
+         </div>
+
+  </main>
+
+
+</div>
+
+<%- include('partials/footer.html') %>
+</body>
+</html>
